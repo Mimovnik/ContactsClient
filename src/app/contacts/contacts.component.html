@@ -6,6 +6,6 @@
         <app-create-contact [validationErrors]="validationErrors"></app-create-contact>
     </div>
     <div *ngIf="connectionError">
-        {{connectionError}}
+        {{connectionError.message}}
     </div>
 </ul>
