@@ -14,7 +14,7 @@ import { ContactsComponent } from '../contacts/contacts.component';
 })
 export class ContactComponent implements OnInit{
   @Input() contact: any;
-  @Input() index:number = -1;
+  id: string = '';
   firstName: string = '';
   lastName: string = '';
   email: string = '';
@@ -27,6 +27,7 @@ export class ContactComponent implements OnInit{
   contacts: ContactsComponent = inject(ContactsComponent);
 
   ngOnInit(): void {
+    this.id = this.contact.id;
     this.firstName = this.contact.firstName;
     this.lastName = this.contact.lastName;
     this.email = this.contact.email;
@@ -38,6 +39,6 @@ export class ContactComponent implements OnInit{
   }
 
   remove(): void {
-    this.contacts.removeContact(this.index);
+    this.contacts.removeContact(this.id);
   }
 }

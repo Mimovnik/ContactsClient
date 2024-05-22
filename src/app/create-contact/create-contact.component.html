@@ -1,56 +1,59 @@
-<mat-expansion-panel>
+<mat-expansion-panel [(expanded)]="expanded">
     <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-card>
-            <mat-card-content>
-                Create new contact
-            </mat-card-content>
-        </mat-card>
-      </mat-panel-title>
+        <mat-panel-title>
+            <mat-card>
+                <mat-card-content>
+                    Create new contact
+                </mat-card-content>
+            </mat-card>
+        </mat-panel-title>
     </mat-expansion-panel-header>
     <form [formGroup]="contactForm" (submit)="createContact()">
         <mat-form-field>
             <mat-label>First Name</mat-label>
-            <input matInput formControlName="firstName">
+            <input matInput formControlName="firstName" required>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Last Name</mat-label>
-            <input matInput formControlName="lastName">
+            <input matInput formControlName="lastName" required>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Email</mat-label>
-            <input type="email" matInput formControlName="email">
+            <input type="email" matInput formControlName="email" required>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Password</mat-label>
-            <input type="password" matInput formControlName="password">
+            <input type="password" matInput formControlName="password" required>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Category</mat-label>
-            <input matInput formControlName="category">
-            </mat-form-field>   
+            <input matInput formControlName="category" required>
+        </mat-form-field>
 
         <mat-form-field>
             <mat-label>Subcategory</mat-label>
-            <input matInput formControlName="subcategory">
+            <input matInput formControlName="subcategory" required>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Phone Number</mat-label>
-            <input type="tel" matInput formControlName="phoneNumber">
+            <input type="tel" matInput formControlName="phoneNumber" required>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Birth Date</mat-label>
-            <input type="date" matInput formControlName="birthDate">
-        </mat-form-field>   
+            <input type="date" matInput formControlName="birthDate" required>
+        </mat-form-field>
 
         <button mat-button color="accent" type="submit">Create</button>
     </form>
-  </mat-expansion-panel>
-  <br>
-
+    <div *ngIf="validationErrors">
+        <app-contact-validation-error *ngFor="let error of validationErrors"
+            [error]="error"></app-contact-validation-error>
+    </div>
+</mat-expansion-panel>
+<br>
