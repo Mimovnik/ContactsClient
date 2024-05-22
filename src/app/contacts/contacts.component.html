@@ -1,6 +1,8 @@
 <ul>
-    <app-contact *ngFor="let contact of contacts"
-    [contact]="contact">
-        
+    <h1>Contacts:</h1>
+    <app-contact *ngFor="let contact of contacts; let i = index"
+    [contact]="contact"
+    [index]="i">
     </app-contact>
+    <app-create-contact></app-create-contact>
 </ul>

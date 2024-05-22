@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ContactsComponent } from '../contacts/contacts.component';
 ;
 
 @Component({
@@ -13,6 +14,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 })
 export class ContactComponent implements OnInit{
   @Input() contact: any;
+  @Input() index:number = -1;
   firstName: string = '';
   lastName: string = '';
   email: string = '';
@@ -21,6 +23,8 @@ export class ContactComponent implements OnInit{
   subcategory: string = '';
   phoneNumber: string = '';
   birthDate: string = '';
+
+  contacts: ContactsComponent = inject(ContactsComponent);
 
   ngOnInit(): void {
     this.firstName = this.contact.firstName;
@@ -31,5 +35,9 @@ export class ContactComponent implements OnInit{
     this.subcategory = this.contact.subcategory;
     this.phoneNumber = this.contact.phoneNumber;
     this.birthDate = this.contact.birthDate;
+  }
+
+  remove(): void {
+    this.contacts.removeContact(this.index);
   }
 }
