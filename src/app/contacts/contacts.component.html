@@ -3,7 +3,7 @@
     <div *ngIf="!connectionError">
         <app-contact *ngFor="let contact of contacts; let i = index" [contact]="contact">
         </app-contact>
-        <app-create-contact [validationErrors]="validationErrors"></app-create-contact>
+        <app-create-contact [validationErrors]="errors"></app-create-contact>
     </div>
     <div *ngIf="connectionError">
         {{connectionError.message}}

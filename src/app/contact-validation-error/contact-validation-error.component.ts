@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
@@ -9,16 +9,7 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './contact-validation-error.component.html',
   styleUrl: './contact-validation-error.component.scss'
 })
-export class ContactValidationErrorComponent implements OnInit {
-  @Input() error: any = null;
-  fieldName: string = 'Contact Validation Error';
-  messages: string[] = [];
-
-  ngOnInit(): void {
-    this.fieldName = Object.keys(this.error)[0];
-    const key = Object.keys(this.error)[0];
-    for (let message of this.error[key]) {
-      this.messages.push(message);
-    }
-  }
+export class ContactValidationErrorComponent {
+  @Input() errorTitle: string = 'Contact Validation Error';
+  @Input() errorMessages: string[] = [];
 }

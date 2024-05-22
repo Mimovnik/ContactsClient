@@ -52,8 +52,8 @@
         <button mat-button color="accent" type="submit">Create</button>
     </form>
     <div *ngIf="validationErrors">
-        <app-contact-validation-error *ngFor="let error of validationErrors"
-            [error]="error"></app-contact-validation-error>
+        <app-contact-validation-error *ngFor="let error of validationErrors" [errorTitle]="error.title"
+            [errorMessages]="error.messages"></app-contact-validation-error>
     </div>
 </mat-expansion-panel>
 <br>

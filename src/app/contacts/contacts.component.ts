@@ -17,7 +17,7 @@ export class ContactsComponent implements OnInit {
   contacts: any[] = [];
   host: string = 'https://localhost:7212/contacts';
   connectionError: any = null;
-  validationErrors: any[] = [];
+  errors: any[] = [];
 
   ngOnInit(): void {
     this.fetchContacts();
@@ -38,7 +38,7 @@ export class ContactsComponent implements OnInit {
   }
 
   private postContact(contact: any): void {
-    this.validationErrors = [];
+    this.errors = [];
     this.httpClient
       .post(this.host, contact)
       .subscribe({
@@ -69,12 +69,15 @@ export class ContactsComponent implements OnInit {
     if (error.status === 0) {
       this.connectionError = {};
       this.connectionError.message = 'Failed to connect to the server. Please check your connection and try again.'
-    } else {
+    } else if (error.status == 400) {
       const entries = Object.entries(error.error.errors);
       for (let [key, value] of entries) {
-        this.validationErrors.push({ [key]: value });
+        this.errors.push({ title: key, messages: value });
       }
+    } else {
+      this.errors.push({ title: error.error.title, messages: '' })
     }
+    console.log(this.errors)
   }
 
   removeContact(id: string): void {

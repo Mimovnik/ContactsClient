@@ -1,11 +1,11 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-            <h4>Invalid {{fieldName}}</h4>
+            <h4>{{errorTitle}}</h4>
         </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <p *ngFor="let msg of messages">
+        <p *ngFor="let msg of errorMessages">
             {{msg}}
         </p>
     </mat-card-content>
