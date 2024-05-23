@@ -1,29 +1,33 @@
 <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-card>
-            <mat-card-content>
-                {{firstName}} {{lastName}}
-            </mat-card-content>
-        </mat-card>
-      </mat-panel-title>
-      <mat-panel-description>
-        <mat-card>
-            <mat-card-content>
-                {{category}} 
-            </mat-card-content>
-        </mat-card>
-        <mat-card>
-            <mat-card-content>
-                {{subcategory}} 
-            </mat-card-content>
-        </mat-card>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>Email: {{email}}</p>
-    <p>Password: {{password}}</p>
-    <p>Phone number: {{phoneNumber}}</p>
-    <p>Birth date: {{birthDate}}</p>
-    <button mat-button color="warn" (click)="remove()">Remove</button>
-  </mat-expansion-panel>
-  <br>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-card>
+        <mat-card-content>
+          {{firstName}} {{lastName}}
+        </mat-card-content>
+      </mat-card>
+    </mat-panel-title>
+    <mat-panel-description>
+      <mat-card>
+        <mat-card-content>
+          {{email}}
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+        <mat-card-content>
+          {{category}}
+        </mat-card-content>
+      </mat-card>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <p>Name: {{firstName}}</p>
+  <p>Surname: {{lastName}}</p>
+  <p>Email: {{email}}</p>
+  <p>Category: {{category}}</p>
+  <p>Subcategory: {{subcategory}}</p>
+  <p>Password: {{password}}</p>
+  <p>Phone number: {{phoneNumber}}</p>
+  <p>Birth date: {{birthDate}}</p>
+  <button mat-button color="warn" (click)="remove()">Remove</button>
+</mat-expansion-panel>
+<br>
