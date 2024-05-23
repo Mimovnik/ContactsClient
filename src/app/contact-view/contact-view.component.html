@@ -28,6 +28,6 @@
   <p>Password: {{password}}</p>
   <p>Phone number: {{phoneNumber}}</p>
   <p>Birth date: {{birthDate}}</p>
-  <button mat-button color="warn" (click)="remove()">Remove</button>
+  <button *ngIf="authService.currentUser$()" mat-button color="warn" (click)="remove()">Remove</button>
 </mat-expansion-panel>
 <br>

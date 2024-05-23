@@ -1,0 +1,16 @@
+<nav>
+    <ul>
+        <li>
+            <a mat-raised-button color="primary" routerLink="/">Contacts</a>
+        </li>
+        <li *ngIf="authService.currentUser$() === null">
+            <a mat-stroked-button color="accent" routerLink="/register">Register</a>
+            <a mat-stroked-button color="accent" routerLink="/login">Login</a>
+        </li>
+
+        <li *ngIf="authService.currentUser$()">
+            <p>Welcome, {{authService.currentUser$()?.username}}</p>
+            <a mat-stroked-button color="accent" (click)="authService.logout()">Logout</a>
+        </li>
+    </ul>
+</nav>

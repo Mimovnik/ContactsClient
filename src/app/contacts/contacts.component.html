@@ -1,11 +1,13 @@
-<ul>
-    <h1>Contacts:</h1>
-    <div *ngIf="!connectionError">
-        <app-contact *ngFor="let contact of contacts; let i = index" [contact]="contact">
+<section>
+    <div *ngIf="contactsService.contacts$()">
+        <h1>Contacts:</h1>
+        <app-contact *ngFor="let contact of contactsService.contacts$(); let i = index" [contact]="contact">
         </app-contact>
-        <app-create-contact [validationErrors]="errors"></app-create-contact>
+        <app-create-contact *ngIf="authService.currentUser$()"
+            [validationErrors]="errorService.errors()"></app-create-contact>
     </div>
-    <div *ngIf="connectionError">
-        {{connectionError.message}}
+    <div *ngIf="contactsService.contacts$() === null">
+        <app-error *ngFor="let error of errorService.errors()" [errorTitle]="error.title"
+            [errorMessages]="error.messages"></app-error>
     </div>
-</ul>
+</section>

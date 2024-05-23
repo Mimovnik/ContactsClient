@@ -1,88 +1,38 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
-import { ContactComponent } from '../contact/contact.component';
+import { ContactViewComponent } from '../contact-view/contact-view.component';
 import { CreateContactComponent } from '../create-contact/create-contact.component';
+import { ErrorComponent } from '../error/error.component';
+import { AuthService } from '../services/auth.service';
+import { ContactsService } from '../services/contacts.service';
+import { ErrorService } from '../services/error.service';
 
 
 @Component({
   selector: 'app-contacts',
   standalone: true,
-  imports: [ContactComponent, CommonModule, CreateContactComponent, HttpClientModule],
+  imports: [
+    ContactViewComponent,
+    CommonModule,
+    CreateContactComponent,
+    ErrorComponent,
+  ],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss'
 })
 export class ContactsComponent implements OnInit {
-  httpClient: HttpClient = inject(HttpClient);
-  contacts: any[] = [];
-  host: string = 'https://localhost:7212/contacts';
-  connectionError: any = null;
-  errors: any[] = [];
+  authService: AuthService = inject(AuthService);
+  contactsService: ContactsService = inject(ContactsService);
+  errorService: ErrorService = inject(ErrorService);
 
   ngOnInit(): void {
-    this.fetchContacts();
-  }
-
-  private fetchContacts(): void {
-    this.httpClient
-      .get(this.host)
-      .subscribe({
-        next: (contacts: any) => {
-          this.contacts = contacts;
-          console.info("Contacts fetched successfully!");
-        },
-        error: (error: any) => {
-          this.handleError(error);
-        }
-      });
-  }
-
-  private postContact(contact: any): void {
-    this.errors = [];
-    this.httpClient
-      .post(this.host, contact)
-      .subscribe({
-        next: () => {
-          this.fetchContacts();
-        },
-        error: (error: any) => {
-          this.handleError(error);
-        }
-      });
-  }
-
-  private deleteContact(id: string): void {
-    this.httpClient
-      .delete(`${this.host}/${id}`)
-      .subscribe({
-        next: () => {
-          this.fetchContacts();
-        },
-        error: (error: any) => {
-          this.handleError(error);
-        }
-      });
-  }
-
-  private handleError(error: any): void {
-    console.info(error);
-    if (error.status === 0) {
-      this.connectionError = {};
-      this.connectionError.message = 'Failed to connect to the server. Please check your connection and try again.'
-    } else if (error.status == 400) {
-      const entries = Object.entries(error.error.errors);
-      for (let [key, value] of entries) {
-        this.errors.push({ title: key, messages: value });
-      }
-    } else {
-      this.errors.push({ title: error.error.title, messages: '' })
-    }
-    console.log(this.errors)
+    this.errorService.clearErrors();
+    this.contactsService.fetchContacts();
   }
 
   removeContact(id: string): void {
-    this.contacts = this.contacts.filter((contact) => contact.id !== id);
-    this.deleteContact(id);
+    this.errorService.clearErrors();
+    this.contactsService.deleteContact(id);
   }
 
   addContact(firstName: string,
@@ -94,6 +44,7 @@ export class ContactsComponent implements OnInit {
     phoneNumber: string,
     birthDate: string
   ): void {
+    this.errorService.clearErrors();
     let contact: any = {
       firstName: firstName ?? '',
       lastName: lastName ?? '',
@@ -104,6 +55,6 @@ export class ContactsComponent implements OnInit {
       phoneNumber: phoneNumber ?? '',
       birthDate: birthDate ?? '',
     };
-    this.postContact(contact);
+    this.contactsService.postContact(contact);
   }
 }

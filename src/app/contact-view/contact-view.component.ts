@@ -1,18 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ContactsComponent } from '../contacts/contacts.component';
+import { AuthService } from '../services/auth.service';
 ;
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [MatExpansionModule, MatCardModule, MatButtonModule],
-  templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss'
+  imports: [MatExpansionModule, MatCardModule, MatButtonModule, CommonModule],
+  templateUrl: './contact-view.component.html',
+  styleUrl: './contact-view.component.scss'
 })
-export class ContactComponent implements OnInit{
+export class ContactViewComponent implements OnInit {
+  authService: AuthService = inject(AuthService);
   @Input() contact: any;
   id: string = '';
   firstName: string = '';

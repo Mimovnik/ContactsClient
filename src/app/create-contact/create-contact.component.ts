@@ -7,8 +7,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { ContactValidationErrorComponent } from '../contact-validation-error/contact-validation-error.component';
 import { ContactsComponent } from '../contacts/contacts.component';
+import { ErrorComponent } from '../error/error.component';
 
 
 @Component({
@@ -22,7 +22,7 @@ import { ContactsComponent } from '../contacts/contacts.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    ContactValidationErrorComponent,
+    ErrorComponent,
     CommonModule,
   ],
   templateUrl: './create-contact.component.html',
